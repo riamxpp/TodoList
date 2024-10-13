@@ -17,26 +17,39 @@
 
   <main class="container">
     <h1>Lista de Tarefas</h1>
-    <table class="table">
-      <thead> 
-        <tr class="table-active">
-          <th scope="col">#</th>
-          <td scope="col">Título</td>
-          <td scope="col">Criado em</td>
-          <td scope="col">Data de entrega</td>
-          <td scope="col">Finalizado em</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Testando título</td>
-          <td>16/02/2024</td>
-          <td>20/02/2024</td>
-          <td>19/02/2024</td>
-        </tr>
-      </tbody>
-    </table>
+    {% if todos %}
+      <table class="table">
+        <thead> 
+          <tr class="table-active">
+            <th scope="col">#</th>
+            <td scope="col">Título</td>
+            <td scope="col">Criado em</td>
+            <td scope="col">Data de entrega</td>
+            <td scope="col">Finalizado em</td>
+            <td scope="col">Ações</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for todo in todos %}
+            <tr>
+              <td>{{ todo.id }}</td>
+              <td>{{ todo.title }}</td>
+              <td>{{ todo.created_at|default:" - " }}</td>
+              <td>{{ todo.deadLine|default:" - " }}</td>
+              <td>{{ todo.finished_at|default:" - " }}</td>
+              <td>
+                <a href="#" class="btn btn-primary btn-sm">Concluir</a>
+                <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+              </td> 
+            </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    {% else %}
+      <p>Não há tarefas cadastradas!</p>
+    {% endif %}
+    
   </main>
   
   <!-- Bootstrap JS e dependências (CDN) -->
