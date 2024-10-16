@@ -6,3 +6,6 @@ class Todo(models.Model):
     created_at = models.DateField(auto_now_add=True, null=False, blank=False)
     deadLine = models.DateField(verbose_name="Fim", null=False, blank=False)
     finished_at = models.DateField(null=True)
+
+    class Meta:
+        ordering = ["deadLine"]
